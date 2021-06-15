@@ -1,32 +1,31 @@
 <?php
 namespace App;
+include 'devcoder/DotEnv.php';
+use DevCoder\DotEnv;
+(new DotEnv(__DIR__ . '/../.env'))->load();
 
 class Counter
 {
-    public $count;
-    public function __construct()
+    public function count1To100(): array
     {
-        $this->count = [];
-    }
-
-    public function count1To100(){
-        for ($i=1; $i <= 100; $i++){
+        $count = [];
+        for ($i=getenv('from'); $i <= getenv('to'); $i++){
             switch ($i){
                 case ($i % 3 == 0 && $i % 5 == 0):
-                    array_push($this->count, "integraciones");
+                    array_push($count, "integraciones");
                     //print_r();
                     break;
                 case ($i % 3 == 0):
-                    array_push($this->count, "falabella");
+                    array_push($count, "falabella");
                     break;
                 case ($i % 5 == 0):
-                    array_push($this->count, "IT");
+                    array_push($count, "IT");
                     break;
                 default:
-                    array_push($this->count, $i);
+                    array_push($count, $i);
                     break;
             }
         }
-        return $this->count;
+        return $count;
     }
 }
